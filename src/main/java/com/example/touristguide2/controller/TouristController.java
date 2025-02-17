@@ -57,7 +57,7 @@ public class TouristController {
     }
 
     // Endpoint til at vise en form for opdatering af en attraktion (GET /attractions/{id}/edit)
-    @GetMapping("/attractions/{id}/delete")
+    @GetMapping("/attractions/{id}/edit")
     public String showEditAttractionForm(@PathVariable int id, Model model) {
         TouristAttraction attraction = touristService.getAttractionById(id);
         if(attraction == null) {
@@ -73,10 +73,4 @@ public class TouristController {
         touristService.updateAttraction(attraction.getId(), attraction.getName(), attraction.getDescription());
         return "redirect:/attractions";
     }
-
-
-
-
-
-
 }

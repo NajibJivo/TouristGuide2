@@ -109,13 +109,12 @@ public class TouristRepository {
     public TouristAttraction addAttraction (String newName, String newDescription){
             // Opret et nyt TouristAttraction-objekt med de modtagne data
         TouristAttraction newAttraction = new TouristAttraction();
-
             // Tilføje det nye objekt til listen
         newAttraction.setName(newName);
         newAttraction.setDescription(newDescription);
-
             // Udskrive en bekræftelse og returnér objektet
         System.out.println("Ny attraktion tilføjet: " + newAttraction.getName());
+        attractionList.add(newAttraction);
         return newAttraction;
     }
 

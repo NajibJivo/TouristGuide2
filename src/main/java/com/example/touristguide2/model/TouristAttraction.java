@@ -15,13 +15,16 @@ public class TouristAttraction {
         this.name = name;
         this.description = description;
         this.city = city;
-        this.tags = (tags != null) ? tags : new ArrayList<>(); //  Hvis tags er null, initialiseres en tom liste
-        this.id = ++idCounter; // Tildeler et unikt ID ved hver instansoprettelse,
-        // sikrer, at alle objekter, som tilføjes, får et unikt ID uden at skulle manuelt sætte dem i repository'et.
+        this.tags = (tags != null) ? tags : new ArrayList<>();
+        this.id = ++idCounter;
+
 
     }
 
     public TouristAttraction() {
+        this.tags = (tags != null) ? tags : new ArrayList<>(); //  Hvis tags er null, initialiseres en tom liste
+        this.id = ++idCounter; // Tildeler et unikt ID ved hver instansoprettelse,
+        // sikrer, at alle objekter, som tilføjes, får et unikt ID uden at skulle manuelt sætte dem i repository'et.
     }
 
     public int getId() {
@@ -56,11 +59,11 @@ public class TouristAttraction {
         this.tags = tags;
     }
 
-    public String getTown() {
+    public String getCity() {
         return city;
     }
 
-    public void setTown(String town) {
-        this.city = town;
+    public void setCity(String city) {
+        this.city = city;
     }
 }
