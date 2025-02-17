@@ -56,11 +56,11 @@ public class TouristAttraction {
         this.tags = tags;
     }
 
-    public String getTown() {
+    public String getCity() {
         return city;
     }
 
-    public void setTown(String town) {
-        this.city = town;
+    public void setCity(String city) {
+        this.city = city;
     }
 }
