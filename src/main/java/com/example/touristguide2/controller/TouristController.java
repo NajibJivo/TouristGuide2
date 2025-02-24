@@ -45,12 +45,12 @@ public class TouristController {
     // Endpoint til at gemme den nye attraktion (POST /save)
     @PostMapping("/save")
     public String saveAttraction(@ModelAttribute TouristAttraction attraction) {
-        touristService.addAttraction(attraction.getName(), attraction.getDescription());
+        touristService.addAttraction(attraction.getName(), attraction.getDescription(), attraction.getCity());
         return "redirect:/attractions";
     }
 
     // Endpoint til at slette en attraktion (GET /attractions/{id}/delete)
-    @GetMapping("attractions/{id}/delete")
+    @PostMapping("attractions/delete/{id}")
     public String deleteAttractions(@PathVariable int id) {
         touristService.deleteAttraction(id);
         return "redirect:/attractions";
@@ -70,7 +70,7 @@ public class TouristController {
     // Endpoint til at opdatere attraktionen (POST /update)
     @PostMapping("/update")
     public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
-        touristService.updateAttraction(attraction.getId(), attraction.getName(), attraction.getDescription());
+        touristService.updateAttraction(attraction.getId(), attraction.getName(), attraction.getDescription(),attraction.getCity());
         return "redirect:/attractions";
     }
 }

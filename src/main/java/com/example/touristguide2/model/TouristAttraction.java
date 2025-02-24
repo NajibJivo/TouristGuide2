@@ -10,6 +10,7 @@ public class TouristAttraction {
     private static int idCounter = 0;
     private List<String> tags;
     private String city;
+    private String image;
 
     public TouristAttraction(String name, String description, String city, List<String> tags) {
         this.name = name;
@@ -65,5 +66,12 @@ public class TouristAttraction {
 
     public void setCity(String city) {
         this.city = city;
+    }
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
