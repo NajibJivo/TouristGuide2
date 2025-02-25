@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Tourist Guide</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/Main.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
 </head>
 <body>
 
@@ -19,9 +19,7 @@
 
     <div class="button-group">
       <a th:href="@{/attractions/{id}(id=${attraction.id})}" class="details-btn">Se detaljer</a>
-      <a th:href="@{/attractions/{id}/edit(id=${attraction.id})}" class="edit-btn">Rediger</a>
-      <form th:action="@{/attractions/delete/{id}(id=${attraction.id})}" method="post" style="display:inline;">
-        <button type="submit" class="delete-btn">Slet</button>
+      <form th:action="@{/attractions/delete/{id}(id=${attraction.id})}" method="post" style="display:flex;">
       </form>
     </div>
   </div>
@@ -30,7 +28,7 @@
 <a href="/add" class="add-btn">Tilføj ny attraktion</a>
 <footer>
   <div class="container">
-    Kontakt os: Max Rytter: gå ind i den nærmeste kebabbutik! Najib Nawabi: nærmeste børnehave! Mads Hvid: Verdensmesterskaberne i skak (som tilskuer) Marcus Heilstrup: kontakt WoW Hardcore Guildleader i OnlyFans
+    Kontakt os: Max Rytter: gå ind i den nærmeste kebabbutik! Najib Nawabi: nærmeste børnehave! Marcus Heilstrup: kontakt WoW Hardcore Guildleader i OnlyFans
   </div>
 </footer>
 </body>

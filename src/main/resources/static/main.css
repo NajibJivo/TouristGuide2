@@ -85,8 +85,10 @@ h1 {
 /* Knapper */
 .button-group {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     padding: 10px;
+    gap: 10px;
+
 }
 
 .details-btn, .edit-btn, .delete-btn {
@@ -119,5 +121,31 @@ h1 {
 }
 
 .delete-btn:hover {
-    background-color: #c82333;
+    background-color: #8a111c;
+}
+.detail-container p {
+    color: white; /* Gør teksten hvid */
+    font-weight: bold; /* Gør teksten fed */
+    font-size: 18px; /* Øger størrelsen */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Tilføjer en sort skygge */
+    padding: 26px; /* Gør baggrunden lidt større */
+    border-radius: 5px; /* Afrundede kanter */
+    display: inline-block; /* Så baggrunden kun dækker teksten */
+}
+
+.add-btn {
+    display: inline-block;
+    background-color: #48d585; /* Blå farve */
+    color: purple;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.add-btn:hover {
+    background-color: #7bae64; /* Mørkere blå ved hover */
 }

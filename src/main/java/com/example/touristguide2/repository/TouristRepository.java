@@ -26,7 +26,6 @@ public class TouristRepository {
         tivoli.setImage("tivoli.png");
         attractionList.add(tivoli);
 
-
         TouristAttraction segway = new TouristAttraction(
                 "Segway Tours Copenhagen",
                 "Miljøvenlig guidet tur, der giver unikt indblik i Københavns kultur og arkitektur.",
