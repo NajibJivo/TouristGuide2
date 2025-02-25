@@ -26,7 +26,6 @@ public class TouristRepository {
         tivoli.setImage("tivoli.png");
         attractionList.add(tivoli);
 
-
         TouristAttraction segway = new TouristAttraction(
                 "Segway Tours Copenhagen",
                 "Miljøvenlig guidet tur, der giver unikt indblik i Københavns kultur og arkitektur.",
@@ -108,13 +107,13 @@ public class TouristRepository {
          return null;
     }
 
-    public TouristAttraction updateAttractionx ( int id, String newName, String newDescription, String newCity){
-
+    public TouristAttraction updateAttractionx ( int id, String newName, String newDescription, String newCity,List<String>newTags){
          for (TouristAttraction attraction : attractionList) {
              if (attraction.getId() == id) {
                     attraction.setName(newName);
                     attraction.setDescription(newDescription);
                  attraction.setCity(newCity);
+                 attraction.setTags(newTags);
                     System.out.println("Attraktion hermed opdateret.");
                     return attraction;
              }
@@ -125,20 +124,23 @@ public class TouristRepository {
 
 
         /*En metode, der modtager de nødvendige data  ( Navn og beskrivelse) og opretter et nyt TouristAttraction-objekt.*/
-    public TouristAttraction addAttraction (String newName, String newDescription, String city){
+        public TouristAttraction addAttraction(String newName, String newDescription, String city, List<String> tags, String image) {
             // Opret et nyt TouristAttraction-objekt med de modtagne data
-        TouristAttraction newAttraction = new TouristAttraction();
+            TouristAttraction newAttraction = new TouristAttraction(newName, newDescription, city, tags);
+
+            // Tilføj billede
+            newAttraction.setImage(image);
 
             // Tilføje det nye objekt til listen
-        newAttraction.setName(newName);
-        newAttraction.setDescription(newDescription);
-        newAttraction.setCity(city);
+            attractionList.add(newAttraction);
+
 
             // Udskrive en bekræftelse og returnér objektet
-        System.out.println("Ny attraktion tilføjet: " + newAttraction.getName());
-        attractionList.add(newAttraction);
-        return newAttraction;
-    }
+            System.out.println("Ny attraktion tilføjet: " + newAttraction.getName());
+            return newAttraction;
+
+
+}
 
     // *En metode til at fjerne en attraktion baseret på dens unikke ID
     public boolean deleteAttraction(int id) {

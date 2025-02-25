@@ -3,21 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Tilføj Attraktion</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/Main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
 </head>
 <body>
 <div class="navbar">
     <a href="/attractions">Hjem</a>
 </div>
-<h1>Tilføj en ny attraktion</h1>
+<div class="container">
+    <h1>Tilføj en ny attraktion</h1>
+    <form action="/save" method="post" class="TilfoejOgUpdate">
+        <label>Navn: <input type="text" name="name" placeholder="Indtast navn" required></label>
+        <label>Beskrivelse: <input type="text" name="description" placeholder="Indtast beskrivelse" required></label>
+        <label>By: <input type="text" name="city" placeholder="Indtast by" required></label>
 
-<form action="/save" method="post">
-    <label>Navn: <input type="text" name="name" required></label><br>
-    <label>Beskrivelse: <input type="text" name="description" required></label><br>
-    <label>By: <input type="text" name="city" required></label><br>
-    <button type="submit">Gem</button>
-</form>
+        <label><strong>Tags:</strong></label>
+        <div class="checkbox-container">
+            <label><input type="checkbox" name="tags" value="Forlystelser"> Forlystelser</label>
+            <label><input type="checkbox" name="tags" value="Historie"> Historie</label>
+            <label><input type="checkbox" name="tags" value="Underholdning"> Underholdning</label>
+            <label><input type="checkbox" name="tags" value="Guidet tur"> Guidet tur</label>
+            <label><input type="checkbox" name="tags" value="Kultur"> Kultur</label>
+            <label><input type="checkbox" name="tags" value="Sejltur"> Sejltur</label>
+            <label><input type="checkbox" name="tags" value="Statue"> Statue</label>
+            <label><input type="checkbox" name="tags" value="Caféer"> Caféer</label>
+        </div>
+        <button type="submit">Gem</button>
 
-<a href="/attractions">Tilbage</a>
+    </form>
+
+    <a href="/attractions">Tilbage</a>
+
+</div>
 </body>
 </html>

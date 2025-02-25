@@ -45,7 +45,7 @@ public class TouristController {
     // Endpoint til at gemme den nye attraktion (POST /save)
     @PostMapping("/save")
     public String saveAttraction(@ModelAttribute TouristAttraction attraction) {
-        touristService.addAttraction(attraction.getName(), attraction.getDescription(), attraction.getCity());
+        touristService.addAttraction(attraction.getName(), attraction.getDescription(), attraction.getCity(), attraction.getTags(),attraction.getImage());
         return "redirect:/attractions";
     }
 
@@ -70,7 +70,7 @@ public class TouristController {
     // Endpoint til at opdatere attraktionen (POST /update)
     @PostMapping("/update")
     public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
-        touristService.updateAttraction(attraction.getId(), attraction.getName(), attraction.getDescription(),attraction.getCity());
+        touristService.updateAttraction(attraction.getId(), attraction.getName(), attraction.getDescription(),attraction.getCity(),attraction.getTags());
         return "redirect:/attractions";
     }
 }

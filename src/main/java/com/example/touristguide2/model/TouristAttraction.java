@@ -23,7 +23,7 @@ public class TouristAttraction {
     }
 
     public TouristAttraction() {
-        this.tags = (tags != null) ? tags : new ArrayList<>(); //  Hvis tags er null, initialiseres en tom liste
+        this.tags = new ArrayList<>(); //
         this.id = ++idCounter; // Tildeler et unikt ID ved hver instansoprettelse,
         // sikrer, at alle objekter, som tilføjes, får et unikt ID uden at skulle manuelt sætte dem i repository'et.
     }
@@ -56,7 +56,7 @@ public class TouristAttraction {
         return tags;
     }
 
-    public void setTags(ArrayList<String> tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 

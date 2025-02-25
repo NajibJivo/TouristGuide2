@@ -3,22 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Opdater Attraktion</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/Main.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
 </head>
 <body>
 <div class="navbar">
   <a href="/attractions">Hjem</a>
 </div>
-<h1>Opdater attraktion</h1>
+<div class="container">
+  <h1>Opdater attraktion</h1>
+  <form action="/update" method="post" class="TilfoejOgUpdate">
+    <input type="hidden" name="id" th:value="${attraction.id}">
+    <label>Navn: <input type="text" name="name" th:value="${attraction.name}" required></label>
+    <label>Beskrivelse: <input type="text" name="description" th:value="${attraction.description}" required></label>
+    <label>By: <input type="text" name="city" th:value="${attraction.city}" required></label>
+    <div class="checkbox-container">
+      <label><input type="checkbox" name="tags" value="Forlystelser"> Forlystelser</label>
+      <label><input type="checkbox" name="tags" value="Historie"> Historie</label>
+      <label><input type="checkbox" name="tags" value="Underholdning"> Underholdning</label>
+      <label><input type="checkbox" name="tags" value="Guidet tur"> Guidet tur</label>
+      <label><input type="checkbox" name="tags" value="Kultur"> Kultur</label>
+      <label><input type="checkbox" name="tags" value="Sejltur"> Sejltur</label>
+      <label><input type="checkbox" name="tags" value="Statue"> Statue</label>
+      <label><input type="checkbox" name="tags" value="Caféer"> Caféer</label>
+    </div>
 
-<form th:action="@{/update}" method="post">
-  <input type="hidden" name="id" th:value="${attraction.id}">
-  <label>Navn: <input type="text" name="name" th:value="${attraction.name}" required></label><br>
-  <label>Beskrivelse: <input type="text" name="description" th:value="${attraction.description}" required></label><br>
-  <label>By: <input type="text" name="city" th:value="${attraction.city}" required></label><br>
-  <button type="submit">Gem ændringer</button>
-</form>
-
-<a href="/attractions">Tilbage</a>
+    <button type="submit">Gem ændringer</button>
+  </form>
+  <a href="/attractions">Tilbage</a>
+</div>
 </body>
 </html>

@@ -1,0 +1,242 @@
+/* styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+
+}
+body {
+    background-image: url('images/img.png'); /* Tilføj / foran */
+    background-size: 100%;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+h1 {
+    margin-top: 20px;
+    font-size: 2em;
+}
+/* Container for attraktioner */
+.attraction-container {
+    margin-top:200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Kort styling */
+.attraction-card {
+    width: 190px;
+    height: 240px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-shadow: 2px 2px 5px rgba(2, 0, 0, 0.7);
+}
+.attraction-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Billeder */
+.attraction-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* Tekst styling */
+.attraction-card h2 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.attraction-card p {
+    font-size: 0.9em;
+
+    text-align: center;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        color: white;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Skygge bag teksten */
+    }
+
+/* Lokation styling */
+.location {
+    display: block;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+}
+
+/* Knapper */
+.button-group {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    gap: 10px;
+
+}
+
+.details-btn, .edit-btn, .delete-btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 3px 7px;
+    border-radius: 4px;
+    color: white;
+    transition: background 0.3s;
+}
+
+.details-btn {
+    background-color: #007bff;
+}
+
+.details-btn:hover {
+    background-color: #0056b3;
+}
+
+.edit-btn {
+    background-color: #28a745;
+}
+
+.edit-btn:hover {
+    background-color: #1e7e34;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.delete-btn:hover {
+    background-color: #8a111c;
+}
+.detail-container p {
+    color: white; /* Gør teksten hvid */
+    font-weight: bold; /* Gør teksten fed */
+    font-size: 18px; /* Øger størrelsen */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Tilføjer en sort skygge */
+    padding: 26px; /* Gør baggrunden lidt større */
+    border-radius: 5px; /* Afrundede kanter */
+    display: inline-block; /* Så baggrunden kun dækker teksten */
+}
+
+.add-btn {
+    display: inline-block;
+    background-color: #48d585; /* Blå farve */
+    color: purple;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.add-btn:hover {
+    background-color: #7bae64; /* Mørkere blå ved hover */
+}
+.tags .tag {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 1px 3px;
+    border-radius: 15px;
+    font-size: 14px;
+    margin-right: 5px;
+}
+.container {
+    margin: 50px auto;
+    width: 50%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #0000001a;
+}
+
+/* Fælles formular styling */
+.TilfoejOgUpdate {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.TilfoejOgUpdate label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+.TilfoejOgUpdate input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.TilfoejOgUpdate button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.TilfoejOgUpdate button:hover {
+    background-color: #218838;
+}
+
+/* Tilbage-link */
+.container a {
+    display: block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.container a:hover {
+    text-decoration: underline;
+}
+.checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px; /* Afstand mellem bokse */
+    justify-content: center;
+    max-width: 600px; /* Sætter en max bredde */
+    margin: 0 auto; /* Centrerer */
+}
+
+.checkbox-container label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+}
+.checkbox-container label:hover {
+    background-color: rgba(0, 128, 0, 0.1); /* Lys grøn baggrund */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2); /* Let skygge */
+    cursor: pointer;
+}

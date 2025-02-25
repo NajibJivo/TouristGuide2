@@ -26,13 +26,14 @@ public class TouristService {
     }
 
     // Opdater en attraktion
-    public TouristAttraction updateAttraction(int id, String newName, String newDescription,String newCity) {
-        return touristRepository.updateAttractionx(id, newName, newDescription,newCity);
+    public TouristAttraction updateAttraction(int id, String newName, String newDescription, String newCity, List<String> newTags) {
+        return touristRepository.updateAttractionx(id, newName, newDescription, newCity, newTags);
     }
 
+
     // Tilføj en ny attraktion
-    public TouristAttraction addAttraction(String name, String description, String city) {
-        return touristRepository.addAttraction(name, description,city);
+    public TouristAttraction addAttraction(String name, String description, String city,List<String> tags, String image) {
+        return touristRepository.addAttraction(name, description,city,tags,image);
     }
 
     // Slet en attraktion
