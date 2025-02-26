@@ -9,15 +9,15 @@
 <div class="navbar">
     <a href="/attractions">Hjem</a>
 </div>
-<h1>Tilføj en ny attraktion</h1>
-
-<form action="/save" method="post">
-    <label>Navn: <input type="text" name="name" required></label><br>
-    <label>Beskrivelse: <input type="text" name="description" required></label><br>
-    <label>By: <input type="text" name="city" required></label><br>
-    <button type="submit">Gem</button>
-</form>
-
-<a href="/attractions">Tilbage</a>
+<div class="container">
+    <h1>Tilføj en ny attraktion</h1>
+    <form action="/save" method="post" class="TilfoejOgUpdate">
+        <label>Navn: <input type="text" name="name" placeholder="Indtast navn" required></label>
+        <label>Beskrivelse: <input type="text" name="description" placeholder="Indtast beskrivelse" required></label>
+        <label>By: <input type="text" name="city" placeholder="Indtast by" required></label>
+        <button type="submit">Gem</button>
+    </form>
+    <a href="/attractions">Tilbage</a>
+</div>
 </body>
 </html>
