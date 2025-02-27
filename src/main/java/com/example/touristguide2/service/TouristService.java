@@ -27,7 +27,7 @@ public class TouristService {
 
     // Opdater en attraktion
     public TouristAttraction updateAttraction(int id, String newName, String newDescription, String newCity, List<String> newTags) {
-        return touristRepository.updateAttractionx(id, newName, newDescription, newCity, newTags);
+        return touristRepository.updateAttraction(id, newName, newDescription, newCity, newTags);
     }
 
 

@@ -107,7 +107,7 @@ public class TouristRepository {
          return null;
     }
 
-    public TouristAttraction updateAttractionx ( int id, String newName, String newDescription, String newCity,List<String>newTags){
+    public TouristAttraction updateAttraction(int id, String newName, String newDescription, String newCity, List<String>newTags){
          for (TouristAttraction attraction : attractionList) {
              if (attraction.getId() == id) {
                     attraction.setName(newName);
@@ -131,7 +131,6 @@ public class TouristRepository {
             // Tilføj billede
             newAttraction.setImage(image);
 
-            // Tilføje det nye objekt til listen
             attractionList.add(newAttraction);
 
 
@@ -142,7 +141,7 @@ public class TouristRepository {
 
 }
 
-    // *En metode til at fjerne en attraktion baseret på dens unikke ID
+    //En metode til at fjerne en attraktion baseret på dens unikke ID
     public boolean deleteAttraction(int id) {
         Iterator<TouristAttraction> iterator = attractionList.iterator();
         while (iterator.hasNext()) {
@@ -152,6 +151,6 @@ public class TouristRepository {
                 System.out.println("Attraktion med følgende ID: " + id + " fjernet." );
             }
         }
-        return true; // Returnerer true, hvis sletningen lykkes.
+        return true;
     }
 }
