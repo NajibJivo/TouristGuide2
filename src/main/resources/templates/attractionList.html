@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Tourist Guide</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/turist3.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/turist4.css}">
 </head>
 <body>
 
@@ -16,7 +16,6 @@
 <div class="attraction-container">
   <div class="attraction-card" th:each="attraction : ${attractions}"
        th:style="|background-image: url('/images/${attraction.image}'); background-size: cover; background-position: center;|">
-    <!-- Accessing the name and description -->
     <h2 th:text="${attraction.name}"></h2>
     <p th:text="${attraction.description}"></p>
 
@@ -27,8 +26,8 @@
     </div>
 
 <div class="button-group">
-  <a th:href="@{/attractions/{id}(id=${attraction.id})}" class="details-btn">Se detaljer</a>
-  <form th:action="@{/attractions/delete/{id}(id=${attraction.id})}" method="post" style="display:flex;">
+  <a th:href="@{/attractions/{name}(name=${attraction.name})}" class="details-btn">Se detaljer</a>
+  <form th:action="@{/attractions/delete/{name}(name=${attraction.name})}" method="post" style="display:flex;">
   </form>
 </div>
 </div>

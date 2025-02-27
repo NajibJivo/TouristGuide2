@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Tilføj Attraktion</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/turist3.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/turist4.css}">
 </head>
 <body>
 <div class="navbar a">
@@ -19,7 +19,7 @@
             <option value="" disabled selected>Vælg en by</option>
             <option th:each="town : ${towns}"
                     th:value="${town}"
-                    th:text="${town.displayName}"> <!-- Use 'displayName' if it's a method of your enum -->
+                    th:text="${town.displayName}">
             </option>
         </select>
 

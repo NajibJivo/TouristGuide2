@@ -23,23 +23,23 @@ public class TouristService {
     }
 
     // Getter
-    public TouristAttraction getAttractionById(int id) {
-        return touristRepository.showSpecificAttraction(id);
+    public TouristAttraction getAttractionByName(String name) {
+        return touristRepository.getAttractionByName(name);
     }
 
     // Opdater en attraktion
-    public TouristAttraction updateAttraction(int id, String newName, String newDescription, TouristTowns newCity, List<TouristTags> newTags) {
-        return touristRepository.updateAttraction(id, newName, newDescription, newCity, newTags);
+    public TouristAttraction updateAttraction(String oldName, String newName, String newDescription, TouristTowns newTown, List<TouristTags> newTags) {
+        return touristRepository.updateAttraction(oldName, newName, newDescription, newTown, newTags);
     }
 
 
     // Tilføj en ny attraktion
-    public TouristAttraction addAttraction(String name, String description, TouristTowns city,List<TouristTags> tags, String image) {
-        return touristRepository.addAttraction(name, description,city,tags,image);
+    public TouristAttraction addAttraction(String name, String description, TouristTowns town,List<TouristTags> tags, String image) {
+        return touristRepository.addAttraction(name, description,town,tags,image);
     }
 
     // Slet en attraktion
-    public boolean deleteAttraction(int id) {
-        return touristRepository.deleteAttraction(id);
+    public boolean deleteAttraction(String name) {
+        return touristRepository.deleteAttraction(name);
     }
 }

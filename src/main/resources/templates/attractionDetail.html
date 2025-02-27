@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Attraktionsdetaljer</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/turist3.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/turist4.css}">
 </head>
 <body>
 <div class="navbar">
@@ -20,8 +20,8 @@
         <span th:each="tag : ${attraction.tags}" th:text="${tag.getDisplayName()}" class="tag"></span>
 
     <div class="button-group">
-        <a th:href="@{/attractions/{id}/edit(id=${attraction.id})}" class="edit-btn">Rediger</a>
-        <form th:action="@{/attractions/delete/{id}(id=${attraction.id})}" method="post">
+        <a th:href="@{/attractions/{id}/edit(id=${attraction.name})}" class="edit-btn">Rediger</a>
+        <form th:action="@{/attractions/delete/{id}(id=${attraction.name})}" method="post">
             <button type="submit" class="delete-btn">Slet</button>
         </form>
     </div>

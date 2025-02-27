@@ -94,28 +94,27 @@ public class TouristRepository {
     }
 
 
-
-        /* En metode til at returnere hele listen af attraktioner */
+    /* En metode til at returnere hele listen af attraktioner */
     public List<TouristAttraction> getAttractionList() {
-            return attractionList;
+        return attractionList;
     }
 
-        /* En metode, der modtager et ID som parameter, itererer listen og returnerer den attraktion, der matcher ID'et. */
-    public TouristAttraction showSpecificAttraction ( int ID){
-         for (TouristAttraction touristAttraction : attractionList) {
-             if (ID == touristAttraction.getId()) {
-                    return touristAttraction;
-             }
-         }
-         return null;
+    /* En metode, der modtager et ID som parameter, itererer listen og returnerer den attraktion, der matcher ID'et. */
+    public TouristAttraction getAttractionByName(String name) {
+        for (TouristAttraction touristAttraction : attractionList) {
+            if (touristAttraction.getName().equalsIgnoreCase(name)) {
+                return touristAttraction;
+            }
+        }
+        return null;
     }
 
-    public TouristAttraction updateAttraction(int id, String newName, String newDescription, TouristTowns newCity, List<TouristTags>newTags) {
+    public TouristAttraction updateAttraction(String oldName, String newName, String newDescription, TouristTowns newTown, List<TouristTags> newTags) {
         for (TouristAttraction attraction : attractionList) {
-            if (attraction.getId() == id) {
+            if (attraction.getName().equalsIgnoreCase(oldName)) {
                 attraction.setName(newName);
                 attraction.setDescription(newDescription);
-                attraction.setTown(newCity);
+                attraction.setTown(newTown);
                 attraction.setTags(newTags);
                 return attraction;
             }
@@ -124,34 +123,29 @@ public class TouristRepository {
     }
 
 
-        /*En metode, der modtager de nødvendige data  ( Navn og beskrivelse) og opretter et nyt TouristAttraction-objekt.*/
-        public TouristAttraction addAttraction(String newName, String newDescription, TouristTowns city, List<TouristTags> tags, String image) {
-            // Opret et nyt TouristAttraction-objekt med de modtagne data
-            TouristAttraction newAttraction = new TouristAttraction(newName, newDescription,city ,tags);
 
-            // Tilføj billede
-            newAttraction.setImage(image);
-
-            attractionList.add(newAttraction);
-
-
-            // Udskrive en bekræftelse og returnér objektet
-            System.out.println("Ny attraktion tilføjet: " + newAttraction.getName());
-            return newAttraction;
+    /*En metode, der modtager de nødvendige data  ( Navn og beskrivelse) og opretter et nyt TouristAttraction-objekt.*/
+    public TouristAttraction addAttraction(String newName, String newDescription, TouristTowns town, List<TouristTags> tags, String image) {
+        TouristAttraction newAttraction = new TouristAttraction(newName, newDescription, town, tags);
+        // Tilføj billede
+        newAttraction.setImage(image);
+        attractionList.add(newAttraction);
+        return newAttraction;
 
 
-}
+    }
 
     //En metode til at fjerne en attraktion baseret på dens unikke ID
-    public boolean deleteAttraction(int id) {
+    public boolean deleteAttraction(String name) {
         Iterator<TouristAttraction> iterator = attractionList.iterator();
         while (iterator.hasNext()) {
             TouristAttraction attraction = iterator.next();
-            if(attraction.getId() == id) {
+            if (attraction.getName().equals(name)) {
                 iterator.remove();
-                System.out.println("Attraktion med følgende ID: " + id + " fjernet." );
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }
+

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Opdater Attraktion</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/turist3.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/turist4.css}">
 </head>
 <body>
 <div class="navbar">
@@ -12,7 +12,7 @@
 <div class="container">
   <h1>Opdater attraktion</h1>
   <form action="#" th:action="@{/update}" th:object="${attraction}" method="post" class="TilfoejOgUpdate">
-    <input type="hidden" name="id" th:value="${attraction.id}">
+    <input type="hidden" name="oldName" th:value="${attraction.name}" />
     <label>Navn: <input type="text" name="name" th:value="${attraction.name}" required></label>
     <label>Beskrivelse: <input type="text" name="description" th:value="${attraction.description}" required></label>
     <label for="town">By:</label>
@@ -21,7 +21,7 @@
       <option th:each="town : ${towns}"
               th:value="${town}"
               th:text="${town.displayName}"
-              th:selected="${town == attraction.town}"> <!-- Dynamically select the town -->
+              th:selected="${town == attraction.town}">
       </option>
     </select>
 

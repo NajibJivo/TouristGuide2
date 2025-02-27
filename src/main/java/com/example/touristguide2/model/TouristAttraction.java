@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TouristAttraction {
-    private int id;
     private String name;
     private String description;
-    private static int idCounter = 0;
     private List<TouristTags> tags;
     private TouristTowns town;
     private String image;
@@ -17,25 +15,14 @@ public class TouristAttraction {
         this.description = description;
         this.town = town;
         this.tags = (tags != null) ? tags : new ArrayList<>();
-        this.id = ++idCounter;
+
 
 
     }
 
     public TouristAttraction() {
-        this.tags = new ArrayList<>(); //
-        this.id = ++idCounter; // Tildeler et unikt ID ved hver instansoprettelse,
-        // sikrer, at alle objekter, som tilføjes, får et unikt ID uden at skulle manuelt sætte dem i repository'et.
+        this.tags = new ArrayList<>();
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
             return name;
     }
