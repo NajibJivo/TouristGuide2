@@ -1,0 +1,83 @@
+/* Global box-sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Generel styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #333;
+    padding: 10px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+/* Container til sider */
+.container {
+    margin: 50px auto;
+    width: 50%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #0000001a;
+}
+
+/* Fælles formular styling */
+.TilfoejOgUpdate {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.TilfoejOgUpdate label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+.TilfoejOgUpdate input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.TilfoejOgUpdate button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.TilfoejOgUpdate button:hover {
+    background-color: #218838;
+}
+
+/* Tilbage-link */
+.container a {
+    display: block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.container a:hover {
+    text-decoration: underline;
+}

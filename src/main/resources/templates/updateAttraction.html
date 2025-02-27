@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Opdater Attraktion</title>
+
   <link rel="stylesheet" type="text/css" th:href="@{/turist3.css}">
 </head>
 <body>
@@ -11,6 +12,7 @@
 </div>
 <div class="container">
   <h1>Opdater attraktion</h1>
+  
   <form action="#" th:action="@{/update}" th:object="${attraction}" method="post" class="TilfoejOgUpdate">
     <input type="hidden" name="id" th:value="${attraction.id}">
     <label>Navn: <input type="text" name="name" th:value="${attraction.name}" required></label>
@@ -38,6 +40,5 @@
 
   <a href="/attractions">Tilbage</a>
 </div>
-
 </body>
 </html>

@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Tilføj Attraktion</title>
+
     <link rel="stylesheet" type="text/css" th:href="@{/turist3.css}">
+
 </head>
 <body>
 <div class="navbar a">
@@ -11,6 +13,7 @@
 </div>
 <div class="container">
     <h1>Tilføj en ny attraktion</h1>
+
     <form action="#" th:action="@{/save}" th:object="${attraction}" method="post" class="TilfoejOgUpdate">
         <label>Navn: <input type="text" name="name" placeholder="Indtast navn" required></label>
         <label>Beskrivelse: <input type="text" name="description" placeholder="Indtast beskrivelse" required></label>

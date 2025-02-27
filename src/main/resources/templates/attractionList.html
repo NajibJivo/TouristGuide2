@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Tourist Guide</title>
+  
   <link rel="stylesheet" type="text/css" th:href="@{/turist3.css}">
 </head>
 <body>
@@ -20,10 +21,13 @@
     <h2 th:text="${attraction.name}"></h2>
     <p th:text="${attraction.description}"></p>
 
+
     <span class="location" th:text="${attraction.town.displayName}"></span>
 
     <div class="tags">
       <span th:each="tag : ${attraction.tags}" th:text="${tag.displayName}" class="tag"></span>
+
+
     </div>
 
 <div class="button-group">
@@ -39,6 +43,7 @@
   <div class="container">
     Kontakt os: Max Rytter: gå ind i den nærmeste kebabbutik! Najib Nawabi: nærmeste børnehave! Marcus Heilstrup: kontakt WoW Hardcore Guildleader i OnlyFangs
   </div>
+
 </footer>
 </body>
 </html>
