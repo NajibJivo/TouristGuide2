@@ -1,6 +1,8 @@
 package com.example.touristguide2.repository;
 
 import com.example.touristguide2.model.TouristAttraction;
+import com.example.touristguide2.model.TouristTags;
+import com.example.touristguide2.model.TouristTowns;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,8 +22,8 @@ public class TouristRepository {
         TouristAttraction tivoli = new TouristAttraction(
                 "Tivoli Haven",
                 "Historisk forlystelsespark med traditionel charme og moderne underholdning",
-                "København",
-                Arrays.asList("Forlystelser", "Historie", "Underholdning")
+                TouristTowns.KOBENHAVN,
+                Arrays.asList(TouristTags.FORLYSTELSER, TouristTags.HISTORIE, TouristTags.UNDERHOLDNING)
         );
         tivoli.setImage("tivoli.png");
         attractionList.add(tivoli);
@@ -29,8 +31,9 @@ public class TouristRepository {
         TouristAttraction segway = new TouristAttraction(
                 "Segway Tours Copenhagen",
                 "Miljøvenlig guidet tur, der giver unikt indblik i Københavns kultur og arkitektur.",
-                "København",
-                Arrays.asList("Guidet tur", "Miljøvenlig", "Kultur")
+                TouristTowns.KOBENHAVN,
+                Arrays.asList(TouristTags.GUIDED_TUR, TouristTags.MILJOE_VENLIG, TouristTags.KULTUR)
+
         );
         segway.setImage("segway.png"); // Tilføj billede
         attractionList.add(segway);
@@ -38,8 +41,8 @@ public class TouristRepository {
         TouristAttraction kanalrundfart = new TouristAttraction(
                 "Hop on – Hop off kanalrundfart",
                 "Fleksibel sejltur, hvor man i eget tempo udforsker byens kanaler og vartegn.",
-                "København",
-                Arrays.asList("Sejltur", "Byvandring")
+                TouristTowns.KOBENHAVN,
+                Arrays.asList(TouristTags.SEJLTUR, TouristTags.BYVANDRING)
         );
         kanalrundfart.setImage("rundfart.png");
         attractionList.add(kanalrundfart);
@@ -47,8 +50,8 @@ public class TouristRepository {
         TouristAttraction havfrue = new TouristAttraction(
                 "Den Lille Havfrue",
                 "Ikonisk bronzestatue inspireret af H.C. Andersens eventyr og Københavns kulturarv.",
-                "København",
-                Arrays.asList("Statue", "Kulturarv")
+                TouristTowns.KOBENHAVN,
+                Arrays.asList(TouristTags.STATUE, TouristTags.KULTUR)
         );
         havfrue.setImage("havfrue.png");
         attractionList.add(havfrue);
@@ -56,8 +59,8 @@ public class TouristRepository {
         TouristAttraction nyhavn = new TouristAttraction(
                 "Nyhavn",
                 "Farverigt havneområde med historiske facader, caféer og livlig atmosfære.",
-                "København",
-                Arrays.asList("Havneområde", "Historie", "Caféer")
+                TouristTowns.KOBENHAVN,
+                Arrays.asList(TouristTags.HAVN, TouristTags.HISTORIE, TouristTags.CAFÉER)
         );
         nyhavn.setImage("nyhavn.png");
         attractionList.add(nyhavn);
@@ -65,8 +68,8 @@ public class TouristRepository {
         TouristAttraction christiania = new TouristAttraction(
                 "Fristaden Christiania",
                 "Alternativ bydel med selvstyre, kreativ kultur og unik samfundsstruktur.",
-                "København",
-                Arrays.asList("Alternativ", "Kreativ", "Samfund")
+                TouristTowns.KOBENHAVN,
+                Arrays.asList(TouristTags.ALTERNATIV, TouristTags.KREATIV, TouristTags.SAMFUND)
         );
         christiania.setImage("christania.png");
         attractionList.add(christiania);
@@ -74,8 +77,8 @@ public class TouristRepository {
         TouristAttraction amalienborg = new TouristAttraction(
                 "Amalienborg Slot",
                 "Kongelig residens i rokokostil, centrum for ceremonielle begivenheder.",
-                "København",
-                Arrays.asList("Kongelig", "Historie")
+                TouristTowns.KOBENHAVN,
+                Arrays.asList(TouristTags.KONGELIG, TouristTags.HISTORIE)
         );
         amalienborg.setImage("Slot.png");
         attractionList.add(amalienborg);
@@ -83,8 +86,8 @@ public class TouristRepository {
         TouristAttraction rosenborg = new TouristAttraction(
                 "Rosenborg Slot",
                 "Renæssanceslot og museum, der huser kongelige skatte og formidler Danmarks historie.",
-                "København",
-                Arrays.asList("Museum", "Historie", "Slot")
+                TouristTowns.KOBENHAVN,
+                Arrays.asList(TouristTags.MUSEUM, TouristTags.HISTORIE, TouristTags.SLOT)
         );
         rosenborg.setImage("rosenborg.png");
         attractionList.add(rosenborg);
@@ -107,26 +110,24 @@ public class TouristRepository {
          return null;
     }
 
-    public TouristAttraction updateAttraction(int id, String newName, String newDescription, String newCity, List<String>newTags){
-         for (TouristAttraction attraction : attractionList) {
-             if (attraction.getId() == id) {
-                    attraction.setName(newName);
-                    attraction.setDescription(newDescription);
-                 attraction.setCity(newCity);
-                 attraction.setTags(newTags);
-                    System.out.println("Attraktion hermed opdateret.");
-                    return attraction;
-             }
-         }
-            System.out.println("Ingen attraktion fundet med ID: " + id);
-            return null;
+    public TouristAttraction updateAttraction(int id, String newName, String newDescription, TouristTowns newCity, List<TouristTags>newTags) {
+        for (TouristAttraction attraction : attractionList) {
+            if (attraction.getId() == id) {
+                attraction.setName(newName);
+                attraction.setDescription(newDescription);
+                attraction.setTown(newCity);
+                attraction.setTags(newTags);
+                return attraction;
+            }
+        }
+        return null;
     }
 
 
         /*En metode, der modtager de nødvendige data  ( Navn og beskrivelse) og opretter et nyt TouristAttraction-objekt.*/
-        public TouristAttraction addAttraction(String newName, String newDescription, String city, List<String> tags, String image) {
+        public TouristAttraction addAttraction(String newName, String newDescription, TouristTowns city, List<TouristTags> tags, String image) {
             // Opret et nyt TouristAttraction-objekt med de modtagne data
-            TouristAttraction newAttraction = new TouristAttraction(newName, newDescription, city, tags);
+            TouristAttraction newAttraction = new TouristAttraction(newName, newDescription,city ,tags);
 
             // Tilføj billede
             newAttraction.setImage(image);

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Opdater Attraktion</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/turist2.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/turist3.css}">
 </head>
 <body>
 <div class="navbar">
@@ -11,25 +11,33 @@
 </div>
 <div class="container">
   <h1>Opdater attraktion</h1>
-  <form action="/update" method="post" class="TilfoejOgUpdate">
+  <form action="#" th:action="@{/update}" th:object="${attraction}" method="post" class="TilfoejOgUpdate">
     <input type="hidden" name="id" th:value="${attraction.id}">
     <label>Navn: <input type="text" name="name" th:value="${attraction.name}" required></label>
     <label>Beskrivelse: <input type="text" name="description" th:value="${attraction.description}" required></label>
-    <label>By: <input type="text" name="city" th:value="${attraction.city}" required></label>
+    <label for="town">By:</label>
+    <select name="town" id="town" required>
+      <option value="" disabled selected th:if="${attraction.town == null}">Vælg en by</option>
+      <option th:each="town : ${towns}"
+              th:value="${town}"
+              th:text="${town.displayName}"
+              th:selected="${town == attraction.town}"> <!-- Dynamically select the town -->
+      </option>
+    </select>
+
     <div class="checkbox-container">
-      <label><input type="checkbox" name="tags" value="Forlystelser"> Forlystelser</label>
-      <label><input type="checkbox" name="tags" value="Historie"> Historie</label>
-      <label><input type="checkbox" name="tags" value="Underholdning"> Underholdning</label>
-      <label><input type="checkbox" name="tags" value="Guidet tur"> Guidet tur</label>
-      <label><input type="checkbox" name="tags" value="Kultur"> Kultur</label>
-      <label><input type="checkbox" name="tags" value="Sejltur"> Sejltur</label>
-      <label><input type="checkbox" name="tags" value="Statue"> Statue</label>
-      <label><input type="checkbox" name="tags" value="Caféer"> Caféer</label>
+      <label th:each="tag : ${tags}">
+        <input type="checkbox" name="tags" th:value="${tag}"
+               th:checked="${attraction.tags.contains(tag)}" />
+        <span th:text="${tag.getDisplayName()}"></span>
+      </label>
     </div>
 
     <button type="submit">Gem ændringer</button>
   </form>
+
   <a href="/attractions">Tilbage</a>
 </div>
+
 </body>
 </html>

@@ -1,11 +1,13 @@
 package com.example.touristguide2.service;
 
 import com.example.touristguide2.model.TouristAttraction;
+import com.example.touristguide2.model.TouristTags;
+import com.example.touristguide2.model.TouristTowns;
 import com.example.touristguide2.repository.TouristRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-/**  Metoderne i service-klassen kalder direkte repository-metoderne **/
+
 @Service
 public class TouristService {
 
@@ -15,24 +17,24 @@ public class TouristService {
         this.touristRepository = touristRepository;
     }
 
-    // Returner alle attraktioner
+    //Getter
     public List<TouristAttraction> getAllAttractions() {
         return touristRepository.getAttractionList();
     }
 
-    // Find en specifik attraktion baseret på ID
+    // Getter
     public TouristAttraction getAttractionById(int id) {
         return touristRepository.showSpecificAttraction(id);
     }
 
     // Opdater en attraktion
-    public TouristAttraction updateAttraction(int id, String newName, String newDescription, String newCity, List<String> newTags) {
+    public TouristAttraction updateAttraction(int id, String newName, String newDescription, TouristTowns newCity, List<TouristTags> newTags) {
         return touristRepository.updateAttraction(id, newName, newDescription, newCity, newTags);
     }
 
 
     // Tilføj en ny attraktion
-    public TouristAttraction addAttraction(String name, String description, String city,List<String> tags, String image) {
+    public TouristAttraction addAttraction(String name, String description, TouristTowns city,List<TouristTags> tags, String image) {
         return touristRepository.addAttraction(name, description,city,tags,image);
     }
 

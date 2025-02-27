@@ -1,6 +1,8 @@
 package com.example.touristguide2.controller;
 
 import com.example.touristguide2.model.TouristAttraction;
+import com.example.touristguide2.model.TouristTags;
+import com.example.touristguide2.model.TouristTowns;
 import com.example.touristguide2.service.TouristService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-/** Controller-klassen håndterer HTTP-requests og sender data videre til Thymeleaf-skabeloner **/
+
 @Controller
 public class TouristController {
     private final TouristService touristService;
@@ -21,31 +23,30 @@ public class TouristController {
     @GetMapping("/attractions")
     public String showAttractions(Model model) {
         model.addAttribute("attractions", touristService.getAllAttractions());
-        return "attractionList"; // Thymeleaf-template: attractionList.html
+        return "attractionList";
     }
 
     // Endpoint til at vise detaljerne for en specifik attraktion (GET /attractions/{id})
     @GetMapping("/attractions/{id}")
     public String showAttractionsDetail(@PathVariable int id, Model model) {
         TouristAttraction attraction = touristService.getAttractionById(id);
-        if(attraction == null) {
-            return "error";
-        }
         model.addAttribute("attraction", attraction);
-        return "attractionDetail"; // Thymeleaf-template: attractionDetail.html
+        return "attractionDetail";
     }
 
     // Endpoint til at vise en form for at tilføje en ny attraktion (GET /add)
     @GetMapping("/add")
     public String showAttractionsForm(Model model) {
+        model.addAttribute("tags", TouristTags.values());
+        model.addAttribute("towns", TouristTowns.values());
         model.addAttribute("attraction", new TouristAttraction());
-        return "addAttraction"; // Thymeleaf-template: addAttraction.html
+        return "addAttraction";
     }
 
     // Endpoint til at gemme den nye attraktion (POST /save)
     @PostMapping("/save")
     public String saveAttraction(@ModelAttribute TouristAttraction attraction) {
-        touristService.addAttraction(attraction.getName(), attraction.getDescription(), attraction.getCity(), attraction.getTags(),attraction.getImage());
+        touristService.addAttraction(attraction.getName(), attraction.getDescription(), attraction.getTown(), attraction.getTags(),attraction.getImage());
         return "redirect:/attractions";
     }
 
@@ -60,17 +61,17 @@ public class TouristController {
     @GetMapping("/attractions/{id}/edit")
     public String showEditAttractionForm(@PathVariable int id, Model model) {
         TouristAttraction attraction = touristService.getAttractionById(id);
-        if(attraction == null) {
-            return "error";
-        }
+        model.addAttribute("tags", TouristTags.values());
+        model.addAttribute("towns", TouristTowns.values());
         model.addAttribute("attraction", attraction);
-        return "updateAttraction"; // Thymeleaf-template: updateAttraction.html
+        return "updateAttraction";
     }
 
     // Endpoint til at opdatere attraktionen (POST /update)
     @PostMapping("/update")
     public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
-        touristService.updateAttraction(attraction.getId(), attraction.getName(), attraction.getDescription(),attraction.getCity(),attraction.getTags());
+
+        touristService.updateAttraction(attraction.getId(), attraction.getName(), attraction.getDescription(),attraction.getTown(),attraction.getTags());
         return "redirect:/attractions";
     }
 }

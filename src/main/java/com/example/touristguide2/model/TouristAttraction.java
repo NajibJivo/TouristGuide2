@@ -8,14 +8,14 @@ public class TouristAttraction {
     private String name;
     private String description;
     private static int idCounter = 0;
-    private List<String> tags;
-    private String city;
+    private List<TouristTags> tags;
+    private TouristTowns town;
     private String image;
 
-    public TouristAttraction(String name, String description, String city, List<String> tags) {
+    public TouristAttraction(String name, String description, TouristTowns town, List<TouristTags> tags) {
         this.name = name;
         this.description = description;
-        this.city = city;
+        this.town = town;
         this.tags = (tags != null) ? tags : new ArrayList<>();
         this.id = ++idCounter;
 
@@ -52,20 +52,20 @@ public class TouristAttraction {
             this.description = description;
     }
 
-    public List<String> getTags() {
+    public List<TouristTags> getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(List<TouristTags> tags) {
         this.tags = tags;
     }
 
-    public String getCity() {
-        return city;
+    public TouristTowns getTown() {
+        return town;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setTown(TouristTowns town) {
+        this.town = town;
     }
     public String getImage() {
         return image;

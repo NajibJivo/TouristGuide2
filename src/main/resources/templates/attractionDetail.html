@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Attraktionsdetaljer</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/turist2.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/turist3.css}">
 </head>
 <body>
 <div class="navbar">
@@ -15,9 +15,9 @@
 <div class="detail-container">
     <img th:src="@{/images/{img}(img=${attraction.image})}" alt="Billede af attraktion">
     <p th:text="${attraction.description}"></p>
-    <span class="location" th:text="${attraction.city}"></span>
+    <span class="location" th:text="${attraction.town.getDisplayName()}"></span>
     <div class="tags">
-        <span th:each="tag : ${attraction.tags}" th:text="${tag}" class="tag"></span>
+        <span th:each="tag : ${attraction.tags}" th:text="${tag.getDisplayName()}" class="tag"></span>
 
     <div class="button-group">
         <a th:href="@{/attractions/{id}/edit(id=${attraction.id})}" class="edit-btn">Rediger</a>

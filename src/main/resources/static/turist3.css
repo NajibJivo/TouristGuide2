@@ -77,13 +77,13 @@ h3 {
     font-size: 0.9em;
 
     text-align: center;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        color: white;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Skygge bag teksten */
-    }
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Skygge bag teksten */
+}
 
 /* Lokation styling */
 .location {
@@ -207,6 +207,21 @@ h3 {
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+/* Styling for town dropdown */
+.TilfoejOgUpdate select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.TilfoejOgUpdate select:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
 }
 
 .TilfoejOgUpdate button {
