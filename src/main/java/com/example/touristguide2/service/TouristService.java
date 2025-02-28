@@ -19,7 +19,7 @@ public class TouristService {
 
     //Getter
     public List<TouristAttraction> getAllAttractions() {
-        return touristRepository.getAttractionList();
+        return touristRepository.getAllAttractions();
     }
 
     // Getter
@@ -28,18 +28,22 @@ public class TouristService {
     }
 
     // Opdater en attraktion
-    public TouristAttraction updateAttraction(String oldName, String newName, String newDescription, TouristTowns newTown, List<TouristTags> newTags) {
-        return touristRepository.updateAttraction(oldName, newName, newDescription, newTown, newTags);
+    public TouristAttraction updateAttraction(TouristAttraction t1) {
+        return touristRepository.updateAttraction(t1);
     }
 
 
     // Tilføj en ny attraktion
-    public TouristAttraction addAttraction(String name, String description, TouristTowns town,List<TouristTags> tags, String image) {
-        return touristRepository.addAttraction(name, description,town,tags,image);
+    public TouristAttraction addAttraction(TouristAttraction t1) {
+        return touristRepository.addAttraction(t1);
     }
 
     // Slet en attraktion
     public boolean deleteAttraction(String name) {
         return touristRepository.deleteAttraction(name);
     }
+    public List<TouristTags> getAttractionTags(String name) {
+        return touristRepository.getAttractionTags(name);
+    }
+
 }

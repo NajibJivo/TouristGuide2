@@ -19,6 +19,9 @@ package com.example.touristguide2.model;
         SLOT("Slot"),
         CAFÉER("Caféer");
 
+
+
+
         private final String displayName;
 
         TouristTags(String displayName) {

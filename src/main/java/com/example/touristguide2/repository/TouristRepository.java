@@ -14,11 +14,11 @@ public class TouristRepository {
     private final List<TouristAttraction> attractionList = new ArrayList<>();
 
     public TouristRepository() {
-        places();
+        populateAttractions();
 
     }
 
-    public void places() {
+    private void populateAttractions() {
         TouristAttraction tivoli = new TouristAttraction(
                 "Tivoli Haven",
                 "Historisk forlystelsespark med traditionel charme og moderne underholdning",
@@ -95,7 +95,7 @@ public class TouristRepository {
 
 
     /* En metode til at returnere hele listen af attraktioner */
-    public List<TouristAttraction> getAttractionList() {
+    public List<TouristAttraction> getAllAttractions() {
         return attractionList;
     }
 
@@ -109,13 +109,13 @@ public class TouristRepository {
         return null;
     }
 
-    public TouristAttraction updateAttraction(String oldName, String newName, String newDescription, TouristTowns newTown, List<TouristTags> newTags) {
+    public TouristAttraction updateAttraction(TouristAttraction input) {
         for (TouristAttraction attraction : attractionList) {
-            if (attraction.getName().equalsIgnoreCase(oldName)) {
-                attraction.setName(newName);
-                attraction.setDescription(newDescription);
-                attraction.setTown(newTown);
-                attraction.setTags(newTags);
+            if (attraction.getName().equalsIgnoreCase(input.getName())) {
+                attraction.setName(input.getName());
+                attraction.setDescription(input.getDescription());
+                attraction.setTown(input.getTowns());
+                attraction.setTags(input.getTags());
                 return attraction;
             }
         }
@@ -125,12 +125,9 @@ public class TouristRepository {
 
 
     /*En metode, der modtager de nødvendige data  ( Navn og beskrivelse) og opretter et nyt TouristAttraction-objekt.*/
-    public TouristAttraction addAttraction(String newName, String newDescription, TouristTowns town, List<TouristTags> tags, String image) {
-        TouristAttraction newAttraction = new TouristAttraction(newName, newDescription, town, tags);
-        // Tilføj billede
-        newAttraction.setImage(image);
-        attractionList.add(newAttraction);
-        return newAttraction;
+    public TouristAttraction addAttraction(TouristAttraction attraction) {
+        attractionList.add(attraction);
+        return attraction;
 
 
     }
@@ -147,5 +144,10 @@ public class TouristRepository {
         }
         return false;
     }
+    public List<TouristTags> getAttractionTags(String name) {
+        TouristAttraction attraction = getAttractionByName(name);
+        return (attraction != null) ? attraction.getTags() : List.of();
+    }
+
 }
 

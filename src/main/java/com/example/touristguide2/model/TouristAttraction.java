@@ -7,13 +7,13 @@ public class TouristAttraction {
     private String name;
     private String description;
     private List<TouristTags> tags;
-    private TouristTowns town;
+    private TouristTowns towns;
     private String image;
 
-    public TouristAttraction(String name, String description, TouristTowns town, List<TouristTags> tags) {
+    public TouristAttraction(String name, String description, TouristTowns towns, List<TouristTags> tags) {
         this.name = name;
         this.description = description;
-        this.town = town;
+        this.towns = towns;
         this.tags = (tags != null) ? tags : new ArrayList<>();
 
 
@@ -47,12 +47,12 @@ public class TouristAttraction {
         this.tags = tags;
     }
 
-    public TouristTowns getTown() {
-        return town;
+    public TouristTowns getTowns() {
+        return towns;
     }
 
-    public void setTown(TouristTowns town) {
-        this.town = town;
+    public void setTown(TouristTowns towns) {
+        this.towns = towns;
     }
     public String getImage() {
         return image;

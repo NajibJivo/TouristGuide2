@@ -19,7 +19,7 @@
     <h2 th:text="${attraction.name}"></h2>
     <p th:text="${attraction.description}"></p>
 
-    <span class="location" th:text="${attraction.town.displayName}"></span>
+    <span class="location" th:text="${attraction.towns.displayName}"></span>
 
     <div class="tags">
       <span th:each="tag : ${attraction.tags}" th:text="${tag.displayName}" class="tag"></span>
