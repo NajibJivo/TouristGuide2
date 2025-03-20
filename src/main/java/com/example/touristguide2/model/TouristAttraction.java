@@ -63,4 +63,8 @@ public class TouristAttraction {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public String toString() {
+        return "TouristAttraction{id=" + id  + ", name" + name + " '}";
+    }
 }

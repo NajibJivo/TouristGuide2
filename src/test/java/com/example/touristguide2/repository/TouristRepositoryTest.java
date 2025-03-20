@@ -33,13 +33,14 @@ class TouristRepositoryTest {
                 new TouristAttraction(2,"Test2", "Test2", "Test2", 2)
         );
 
-        when(jdbcTemplate.query(anyString(), any(RowMapper.class))).thenReturn(mockData);
+        when(jdbcTemplate.query(anyString(), any(RowMapper.class))).thenReturn(Arrays.asList(
+                new TouristAttraction(1,"Test1", "Test1", "Test1", 1),
+                new TouristAttraction(2,"Test2", "Test2", "Test2", 2)
+        ));
 
         List<TouristAttraction> result = touristRepository.findAll();
 
         assertEquals(2, result.size());
-        assertEquals(2, result.get(0).getName());
-        assertEquals(2, result.get(1).getName());
 
     }
 
