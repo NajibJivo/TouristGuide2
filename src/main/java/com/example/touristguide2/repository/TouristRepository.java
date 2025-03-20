@@ -2,13 +2,22 @@ package com.example.touristguide2.repository;
 
 import com.example.touristguide2.database.DatabaseConnector;
 import com.example.touristguide2.model.TouristAttraction;
-import org.springframework.stereotype.Repository;
+import org.springframework.jdbc.core.JdbcTemplate;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+
 public class TouristRepository {
+
+    private JdbcTemplate jdbcTemplate;
+
+    public TouristRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public TouristRepository() {
+    }
 
     public List<TouristAttraction> getAllAttractions() {
         List<TouristAttraction> attractions = new ArrayList<>();
@@ -21,7 +30,7 @@ public class TouristRepository {
             while (rs.next()) {
                 String name = rs.getString("name");
                 String description = rs.getString("description");
-                attractions.add(new TouristAttraction(name, description));
+                attractions.add(new TouristAttraction());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,7 +47,8 @@ public class TouristRepository {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return new TouristAttraction();
+                return new TouristAttraction(rs.getString("name"),
+                        rs.getString("description"), null,null);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,6 +82,25 @@ public class TouristRepository {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public TouristAttraction updateAttraction(TouristAttraction attraction) {
+        String sql = "UPDATE TouristAttraction SET description = ? WHERE name = ?";
+        try(Connection conn = DatabaseConnector.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+
+            stmt.setString(1, attraction.getDescription());
+            stmt.setString(2, attraction.getName());
+
+            int affectedRows = stmt.executeUpdate();
+            if(affectedRows > 0) {
+                return attraction;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
 

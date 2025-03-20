@@ -8,19 +8,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 
-@Service
 public class TouristService {
 
-    private final TouristRepository touristRepository;
+    private final TouristRepository touristRepository = new TouristRepository();
 
-    public TouristService(TouristRepository touristRepository) {
-        this.touristRepository = touristRepository;
-    }
 
-    //Getter
     public List<TouristAttraction> getAllAttractions() {
         return touristRepository.getAllAttractions();
     }
+
+
 
     // Getter
     public TouristAttraction getAttractionByName(String name) {
@@ -28,22 +25,21 @@ public class TouristService {
     }
 
     // Opdater en attraktion
-    public TouristAttraction updateAttraction(TouristAttraction t1) {
-        return touristRepository.updateAttraction(t1);
+    public TouristAttraction updateAttraction(TouristAttraction attraction) {
+        return touristRepository.updateAttraction(attraction);
     }
 
 
     // Tilføj en ny attraktion
-    public TouristAttraction addAttraction(TouristAttraction t1) {
-        return touristRepository.addAttraction(t1);
+    public TouristAttraction addAttraction(TouristAttraction attraction) {
+        return touristRepository.addAttraction(attraction);
     }
 
     // Slet en attraktion
     public boolean deleteAttraction(String name) {
         return touristRepository.deleteAttraction(name);
     }
-    public List<TouristTags> getAttractionTags(String name) {
-        return touristRepository.getAttractionTags(name);
+    /**public List<TouristTags> getAttractionTags(String name) {
+        return touristRepository.getAttractionTags(name); **/
     }
-
 }
