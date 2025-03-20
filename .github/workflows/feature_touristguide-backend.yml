@@ -7,6 +7,9 @@ on:
   push:
     branches:
       - feature
+  pull_request:
+    branches:
+      - feautre
   workflow_dispatch:
 
 jobs:
@@ -21,7 +24,7 @@ jobs:
       - name: Set up Java version
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'microsoft'
 
       - name: Build with Maven
