@@ -1,89 +1,54 @@
 package com.example.touristguide2.controller;
 
+
 import com.example.touristguide2.model.TouristAttraction;
-import com.example.touristguide2.model.TouristTags;
-import com.example.touristguide2.model.TouristTowns;
 import com.example.touristguide2.service.TouristService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("api/attractions")
 public class TouristController {
-    private final TouristService touristService;
+    private final TouristService service;
 
-    public TouristController(TouristService touristService) {
-        this.touristService = touristService;
+    public TouristController(TouristService service) {
+        this.service = service;
     }
 
-    // Endpoint til at vise alle attraktioner (GET /attractions)
-    @GetMapping("/attractions")
-    public String getAllAttractions(Model model) {
-        model.addAttribute("attractions", touristService.getAllAttractions());
-        return "attractionList";
+    // 📌 Hent alle attraktioner
+    @GetMapping
+    public ResponseEntity<List<TouristAttraction>> getAllAttractions() {
+        List<TouristAttraction> attractions = service.getAllAttractions();
+        return ResponseEntity.ok(attractions);
     }
 
-    // Endpoint til at vise detaljerne for en specifik attraktion (GET /attractions/{name})
-    @GetMapping("/attractions/{name}")
-    public String getAttractionByName(@PathVariable String name, Model model) {
-        TouristAttraction attraction = touristService.getAttractionByName(name);
-        model.addAttribute("attraction", attraction);
-        return "attractionDetail";
+    // 📌 Hent en attraktion baseret på ID
+    @GetMapping("/{id}")
+    public ResponseEntity<TouristAttraction> getAttractionById(@PathVariable int id) {
+        TouristAttraction attraction = service.getAttractionById(id);
+        return attraction != null ? ResponseEntity.ok(attraction) : ResponseEntity.notFound().build();
     }
 
-    // Endpoint til at vise en form for at tilføje en ny attraktion (GET /add)
-    @GetMapping("/add")
-    public String addAttraction(Model model) {
-        model.addAttribute("tags", TouristTags.values());
-        model.addAttribute("towns", TouristTowns.values());
-        model.addAttribute("attraction", new TouristAttraction());
-        return "addAttraction";
+    // 📌 Tilføj en ny attraktion
+    @PostMapping
+    public ResponseEntity<String> addAttraction(@RequestBody TouristAttraction attraction) {
+        service.addAttraction(attraction);
+        return ResponseEntity.ok("Attraction added successfully!");
     }
 
-    // Endpoint til at gemme den nye attraktion (POST /save)
-    @PostMapping("/save")
-    public String saveAttraction(@ModelAttribute ("attraction") TouristAttraction attraction) {
-        touristService.addAttraction(attraction);
-        return "redirect:/attractions";
+    // 📌 Opdater en eksisterende attraktion
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateAttraction(@PathVariable int id, @RequestBody TouristAttraction attraction) {
+        service.updateAttraction(id, attraction);
+        return ResponseEntity.ok("Attraction updated successfully!");
     }
 
-    // Endpoint til at slette en attraktion (GET /attractions/{name}/delete)
-    @PostMapping("attractions/delete/{name}")
-    public String deleteAttraction(@PathVariable String name) {
-        touristService.deleteAttraction(name);
-        return "redirect:/attractions";
-    }
-    @GetMapping("/attractions/{name}/tags")
-    public String getAttractionTags(@PathVariable String name, Model model) {
-        TouristAttraction attraction = touristService.getAttractionByName(name);
-        List<TouristTags> tags = touristService.getAttractionTags(name);
-        model.addAttribute("name", name);
-        model.addAttribute("tags", tags);
-        model.addAttribute("attraction", attraction);
-
-        return "attractionTags";
-    }
-
-
-    // Endpoint til at vise en form for opdatering af en attraktion (GET /attractions/{name}/edit)
-    @GetMapping("/attractions/{name}/edit")
-    public String editAttraction(@PathVariable String name, Model model) {
-        TouristAttraction attraction = touristService.getAttractionByName(name);
-        model.addAttribute("tags", TouristTags.values());
-        model.addAttribute("towns", TouristTowns.values());
-        model.addAttribute("attraction", attraction);
-        return "editAttraction";
-    }
-
-
-    // Endpoint til at opdatere attraktionen (POST /update)
-    @PostMapping("/update")
-    public String updateAttraction(@ModelAttribute ("attraction") TouristAttraction attraction) {
-        touristService.updateAttraction(attraction);
-
-        return "redirect:/attractions";
+    // 📌 Slet en attraktion
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteAttraction(@PathVariable int id) {
+        service.deleteAttraction(id);
+        return ResponseEntity.ok("Attraction deleted successfully!");
     }
 }
-

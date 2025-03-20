@@ -1,67 +1,62 @@
 package com.example.touristguide2.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TouristAttraction {
+    private int id;
     private String name;
     private String description;
-    private List<TouristTags> tags;
-    private TouristTowns towns;
-    private String image;
+    private String location;
+    private int categoryId;
 
-    public TouristAttraction(String name, String description, TouristTowns towns, List<TouristTags> tags) {
+    // Konstruktør inkl. ID (bruges ved hentning fra databasen - findAll)
+    public TouristAttraction(int id,String name, String description, String location, int categoryId) {
+        this.id = id;
         this.name = name;
         this.description = description;
-        this.towns = towns;
-        this.tags = (tags != null) ? tags : new ArrayList<>();
+        this.location = location;
+        this.categoryId = categoryId;
     }
 
-    public TouristAttraction(String name, String description) {
+    // Konstruktør uden ID (bruges ved oprettelse af nye attraktioner)
+    public TouristAttraction(String name, String description, String location, int categoryId) {
         this.name = name;
         this.description = description;
-        this.tags = new ArrayList<>();
+        this.location = location;
+        this.categoryId = categoryId;
     }
 
-    public TouristAttraction() {
-        this.tags = new ArrayList<>();
+    public int getId() {
+        return id;
     }
+
     public String getName() {
-            return name;
-    }
-
-    public void setName(String name) {
-            this.name = name;
+        return name;
     }
 
     public String getDescription() {
-            return description;
+        return description;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setDescription(String description) {
-            this.description = description;
+        this.description = description;
     }
 
-    public List<TouristTags> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<TouristTags> tags) {
-        this.tags = tags;
-    }
-
-    public TouristTowns getTowns() {
-        return towns;
-    }
-
-    public void setTown(TouristTowns towns) {
-        this.towns = towns;
-    }
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

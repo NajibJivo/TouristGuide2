@@ -1,45 +1,38 @@
 package com.example.touristguide2.service;
 
+
 import com.example.touristguide2.model.TouristAttraction;
-import com.example.touristguide2.model.TouristTags;
-import com.example.touristguide2.model.TouristTowns;
 import com.example.touristguide2.repository.TouristRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-
+@Service
 public class TouristService {
 
-    private final TouristRepository touristRepository = new TouristRepository();
+    private final TouristRepository repository;
 
+    public TouristService(TouristRepository repository) {
+        this.repository = repository;
+    }
 
     public List<TouristAttraction> getAllAttractions() {
-        return touristRepository.getAllAttractions();
+        return repository.findAll();
     }
 
-
-
-    // Getter
-    public TouristAttraction getAttractionByName(String name) {
-        return touristRepository.getAttractionByName(name);
+    public TouristAttraction getAttractionById(int id) {
+        return repository.findById(id);
     }
 
-    // Opdater en attraktion
-    public TouristAttraction updateAttraction(TouristAttraction attraction) {
-        return touristRepository.updateAttraction(attraction);
+    public void addAttraction(TouristAttraction attraction) {
+        repository.save(attraction);
     }
 
-
-    // Tilføj en ny attraktion
-    public TouristAttraction addAttraction(TouristAttraction attraction) {
-        return touristRepository.addAttraction(attraction);
+    public void updateAttraction(int id, TouristAttraction attraction) {
+        repository.update(id, attraction);
     }
 
-    // Slet en attraktion
-    public boolean deleteAttraction(String name) {
-        return touristRepository.deleteAttraction(name);
-    }
-    /**public List<TouristTags> getAttractionTags(String name) {
-        return touristRepository.getAttractionTags(name); **/
+    public void deleteAttraction(int id) {
+        repository.deleteById(id);
     }
 }

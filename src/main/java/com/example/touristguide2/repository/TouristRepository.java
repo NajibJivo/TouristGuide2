@@ -1,106 +1,60 @@
 package com.example.touristguide2.repository;
-
-import com.example.touristguide2.database.DatabaseConnector;
 import com.example.touristguide2.model.TouristAttraction;
 import org.springframework.jdbc.core.JdbcTemplate;
-import java.sql.*;
-import java.util.ArrayList;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
-
+@Repository
 public class TouristRepository {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public TouristRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public TouristRepository() {
+    // Defineret RowMapper separat for at undgå ambiguitet
+    private final RowMapper<TouristAttraction> rowMapper = (rs, rowNum) -> new TouristAttraction(
+            rs.getInt("id"),
+            rs.getString("name"),
+            rs.getString("description"),
+            rs.getString("location"),
+            rs.getInt("category_id")
+    );
+
+    // Hent alle attraktioner
+   public List<TouristAttraction> findAll() {
+        String sql = "SELECT * FROM tourist_attractions";
+        return jdbcTemplate.query(sql, rowMapper);
+   }
+
+   // Hent en specifik attraktion baseret på ID
+    public TouristAttraction findById(int id) {
+        String sql = "SELECT * FROM tourist_attractions WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 
-    public List<TouristAttraction> getAllAttractions() {
-        List<TouristAttraction> attractions = new ArrayList<>();
-        String sql = "SELECT name, description FROM TouristAttraction";
+    // Indsæt en ny attraktion i databasen
+   public void save(TouristAttraction attraction) {
+        String sql = "INSERT INTO tourist_attractions (name, description, location, category_id) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, attraction.getName(), attraction.getDescription()
+                , attraction.getLocation(), attraction.getCategoryId());
+   }
 
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                String name = rs.getString("name");
-                String description = rs.getString("description");
-                attractions.add(new TouristAttraction());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return attractions;
+    // Opdater en eksisterende attraktion
+    public void update(int id, TouristAttraction attraction) {
+        String sql = "UPDATE tourist_attractions SET name = ?, description = ?, location = ?, category_id = ? WHERE id = ?";
+        jdbcTemplate.update(sql, attraction.getName(), attraction.getDescription()
+                , attraction.getLocation(), attraction.getCategoryId(), attraction.getId());
     }
 
-    public TouristAttraction getAttractionByName(String name) {
-        String sql = "SELECT name, description FROM TouristAttraction WHERE name = ?";
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, name);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return new TouristAttraction(rs.getString("name"),
-                        rs.getString("description"), null,null);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+    // Slet en attraktion baseret på ID
+    public void deleteById(int id) {
+        String sql = "DELETE FROM tourist_attractions WHERE id = ?";
+        jdbcTemplate.update(sql, id);
     }
 
-    public boolean addAttraction(TouristAttraction attraction) {
-        String sql = "INSERT INTO TouristAttraction (name, description) VALUES (?, ?)";
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, attraction.getName());
-            stmt.setString(2, attraction.getDescription());
-
-            return stmt.executeUpdate() > 0; // Returnerer true, hvis en række blev indsat
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean deleteAttraction(String name) {
-        String sql = "DELETE FROM TouristAttraction WHERE name = ?";
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, name);
-            return stmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public TouristAttraction updateAttraction(TouristAttraction attraction) {
-        String sql = "UPDATE TouristAttraction SET description = ? WHERE name = ?";
-        try(Connection conn = DatabaseConnector.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-
-            stmt.setString(1, attraction.getDescription());
-            stmt.setString(2, attraction.getName());
-
-            int affectedRows = stmt.executeUpdate();
-            if(affectedRows > 0) {
-                return attraction;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }
 
