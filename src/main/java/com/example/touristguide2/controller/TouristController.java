@@ -3,6 +3,7 @@ package com.example.touristguide2.controller;
 
 import com.example.touristguide2.model.TouristAttraction;
 import com.example.touristguide2.service.TouristService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("api/attractions")
 public class TouristController {
+
+    @Autowired
     private final TouristService service;
 
     public TouristController(TouristService service) {
