@@ -7,6 +7,10 @@ public class TouristAttraction {
     private String location;
     private int categoryId;
 
+    // 🟢 Default constructor kræves af Jackson for at kunne deserialisere JSON
+    public TouristAttraction() {
+    }
+
     // Konstruktør inkl. ID (bruges ved hentning fra databasen - findAll)
     public TouristAttraction(int id,String name, String description, String location, int categoryId) {
         this.id = id;

@@ -5,10 +5,10 @@ import com.example.touristguide2.service.TouristService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -25,7 +25,7 @@ class TouristControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Mock
+    @MockitoBean // så Spring ikke forsøger at instantiere den
     private TouristService service;
 
     @InjectMocks
@@ -43,8 +43,8 @@ class TouristControllerTest {
         mockMvc.perform(get("/api/attractions"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(2))
-                .andExpect(jsonPath("$[0].name").value((1)))
-                .andExpect(jsonPath("$[1].name").value(2));
+                .andExpect(jsonPath("$[0].name").value(("Test1")))
+                .andExpect(jsonPath("$[1].name").value(("Test2")));
     }
 
     @Test
@@ -55,7 +55,7 @@ class TouristControllerTest {
 
         mockMvc.perform(get("/api/attractions/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value(1));
+                .andExpect(jsonPath("$.name").value("Test1"));
     }
 
     @Test
@@ -74,7 +74,7 @@ class TouristControllerTest {
                 .contentType("application/json")
                 .content(attraction))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").value("Attraction added successfully!"));
+                .andExpect(content().string("Attraction added successfully!"));
 
     }
 
@@ -94,13 +94,13 @@ class TouristControllerTest {
                 .contentType("application/json")
                 .content(updatedAttraction))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").value("Attraction updated successfully!"));
+                .andExpect(content().string("Attraction updated successfully!"));
     }
 
     @Test
     void testDeleteAttraction() throws Exception {
         mockMvc.perform(delete("/api/attractions/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").value("Attraction deleted successfully!"));
+                .andExpect(content().string("Attraction deleted successfully!"));
     }
 }
